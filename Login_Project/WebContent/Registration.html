@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <script type="text/javascript">
+	function validation() {
+		var fname = document.getElementById("ufname").value;
+		var ferr = document.getElementById("fmsg");
+		if (fname.length == " ") {
+			ferr.innerHTML = "Please Enter firstname";
+			return false;
+		} else {
+			return true;
+		}
+	} -->
+</script>
+<style>
+.body {
+	border: 5px solid #169393;
+	background-color:#169393;
+}
+
+.div {
+	width: 500px;
+	height: 480px;
+	background-color: #89c389;
+	margin-left: 30%;
+	margin-top: 20px;
+	background-image: url("img/slide-bg-2.jpg");
+}
+
+input {
+	font-size: large;
+	border-color: #89c389;
+	width: 460px;
+	height: 40px;
+}
+</style>
+<meta charset="UTF-8">
+</head>
+<body class="body">
+	<div class="div">
+
+		<center>
+			<h1>REGISTER</h1>
+			<form action="RegistrationServlet" method="post">
+				<label><input type="text" name="fname" id="ufname"
+					placeholder="Enter First Name" required="required"><span
+					id="fmsg"></span></label><br> <br> <label><input
+					type="text" name="sname" placeholder="Enter SurName"
+					required="required"></label><br> <br> <label><input
+					type="text" name="mobile" placeholder="Enter Mobile Number"
+					required="required"></label> <br> <br> <label><input
+					type="email" name="email" placeholder="Enter Email Id"
+					required="required"></label><br> <br> <label><input
+					type="password" name="passwrd" placeholder="Enter Password"
+					required="required"></label><br> <br> <br> <label><input
+					type="submit" value="Submit"
+					style="background-color:#034444;border-color:#034444;color: black;height: 50px;"></label>
+			</form>
+		</center>
+	</div>
+
+</body>
+</html>
