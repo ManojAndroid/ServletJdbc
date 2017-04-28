@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,8 +46,8 @@ public class RegistrationServlet extends HttpServlet {
 			int i=preparedStatement.executeUpdate();
             if(i>0)
             {
-				printWriter.println("<html><body bgcolor='#169393'><h1>Your Form is Sucessfully Submitted </h1></body></html>");
-
+                  RequestDispatcher requestDispatcher=request.getRequestDispatcher("SuccessfullyRegister.html");
+                  requestDispatcher.forward(request, response);
             }
             else
             {

@@ -2,7 +2,11 @@ package com.bridgelabz.LoginApp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,15 +16,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/*@WebServlet("/LoginServlet")*/
-public class LoginServlet extends HttpServlet {
+/**
+ * Servlet implementation class ViewServlet
+ */
+@WebServlet("/ViewServlet")
+public class ViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter printWriter = response.getWriter();
-		String email = request.getParameter("Email");
-		String password = request.getParameter("pass");
+		
+		ServletContext servletContext = getServletContext();
+		String email =  (String) servletContext.getAttribute("uemail");
+	
+		String password =  (String) servletContext.getAttribute("upass");
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -39,12 +49,20 @@ public class LoginServlet extends HttpServlet {
 			if (resultSet.next()) {
 				String name = resultSet.getString(1);
 				String surname = resultSet.getString(2);
-				ServletContext servletContext = getServletContext();
-				servletContext.setAttribute("uemail", email);
-				servletContext.setAttribute("upass", password);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
-				dispatcher.forward(request, response);
+				String mobilf = resultSet.getString(3);
+				String emailf = resultSet.getString(4);
+				String passwordf = resultSet.getString(5);
+				printWriter.println(
+						  "<html><body bgcolor='cyan'><h1>+"+name+"+"+surname+"+"+mobilf+"+"+emailf+"+"+passwordf+"+surname+"+"+ </h1><a href='Login.html'></a></body></html>"
+						  );
+
 			} else {
+
+				/*
+				 * printWriter.println(
+				 * "<html><body bgcolor='cyan'><h1>Invalid Email/Password </h1><a href='Login.html'></a></body></html>"
+				 * );
+				 */
 				RequestDispatcher dispatcher = request.getRequestDispatcher("Redirection.html");
 				dispatcher.forward(request, response);
 			}

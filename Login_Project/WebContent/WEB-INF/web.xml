@@ -3,6 +3,10 @@
   <display-name>Login_Project</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
+    <welcome-file>Login.html</welcome-file>
+    <welcome-file>Redirection.html</welcome-file>
+    <welcome-file>Registration.html</welcome-file>
+    <welcome-file>SuccessfullyRegister.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>first</servlet-name>
@@ -12,7 +16,6 @@
     <servlet-name>first</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Second</servlet-name>
     <servlet-class>com.bridgelabz.LoginApp.RegistrationServlet</servlet-class>
