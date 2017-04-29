@@ -26,12 +26,10 @@ public class ViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter printWriter = response.getWriter();
-		
-		ServletContext servletContext = getServletContext();
-		String email =  (String) servletContext.getAttribute("uemail");
-	
-		String password =  (String) servletContext.getAttribute("upass");
 
+		ServletContext servletContext = getServletContext();
+		String email = (String) servletContext.getAttribute("uemail");
+		String password = (String) servletContext.getAttribute("upass");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -47,22 +45,29 @@ public class ViewServlet extends HttpServlet {
 			preparedStatement.setString(2, password);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				String name = resultSet.getString(1);
-				String surname = resultSet.getString(2);
-				String mobilf = resultSet.getString(3);
-				String emailf = resultSet.getString(4);
-				String passwordf = resultSet.getString(5);
-				printWriter.println(
-						  "<html><body bgcolor='cyan'><h1>+"+name+"+"+surname+"+"+mobilf+"+"+emailf+"+"+passwordf+"+surname+"+"+ </h1><a href='Login.html'></a></body></html>"
-						  );
+				printWriter.println("<html><body>");
+				printWriter.println("<center>");
+				printWriter.println("<table border='5px solid cyan; align='center'; width='50%';height='50%'>");
+				printWriter.println("<tr><td>");
+				printWriter.println("FirstName    :" +resultSet.getString(1));
+				printWriter.println("</tr></td><label>");
+				printWriter.println("<label><tr><td>");
+				printWriter.println("SurName       :" + resultSet.getString(2));
+				printWriter.println("</tr></td></label>");
+				printWriter.println("<<label>tr><td>");
+				printWriter.println("MobileNumber   :" + resultSet.getString(3));
+				printWriter.println("</tr></td><label>");
+				printWriter.println("<label><tr><td>");
+				printWriter.println("Email          :" + resultSet.getString(4));
+				printWriter.println("</td></tr><label></table>");
+				printWriter.println("<a href='main.jsp'><back</a>");
+				printWriter.println("<center>");
+				printWriter.println("</body></html>");
+				
 
 			} else {
 
-				/*
-				 * printWriter.println(
-				 * "<html><body bgcolor='cyan'><h1>Invalid Email/Password </h1><a href='Login.html'></a></body></html>"
-				 * );
-				 */
+
 				RequestDispatcher dispatcher = request.getRequestDispatcher("Redirection.html");
 				dispatcher.forward(request, response);
 			}

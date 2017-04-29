@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /*@WebServlet("/LoginServlet")*/
 public class LoginServlet extends HttpServlet {
@@ -18,6 +19,13 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		HttpSession session=request.getSession();
+		session.setMaxInactiveInterval(30*60);
+		
+		
+		
+		
 		PrintWriter printWriter = response.getWriter();
 		String email = request.getParameter("Email");
 		String password = request.getParameter("pass");
@@ -42,6 +50,8 @@ public class LoginServlet extends HttpServlet {
 				ServletContext servletContext = getServletContext();
 				servletContext.setAttribute("uemail", email);
 				servletContext.setAttribute("upass", password);
+				servletContext.setAttribute("uname", name);
+				servletContext.setAttribute("usurname", surname);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 				dispatcher.forward(request, response);
 			} else {

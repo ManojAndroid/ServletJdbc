@@ -1,4 +1,4 @@
-package com.bridgelabz;
+package com.bridgelabz.LoginApp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +22,6 @@ public class DeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter printWriter = response.getWriter();
 
 		ServletContext servletContext = getServletContext();
 		String email = (String) servletContext.getAttribute("uemail");
@@ -43,7 +42,8 @@ public class DeleteServlet extends HttpServlet {
 			preparedStatement.setString(2, password);
 			int i = preparedStatement.executeUpdate();
 			if (i > 0) {
-				printWriter.println("<html><body bgcolor='cyan'><h1>Data is deleted </h1></body></html>");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("Deleted.html");
+				dispatcher.forward(request, response);
 			} else {
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("Redirection.html");
