@@ -19,17 +19,18 @@ public class LogoutServlet extends HttpServlet {
           
 		  
 		 
-		  PrintWriter out=response.getWriter();  
+		  PrintWriter writer=response.getWriter();  
           HttpSession session=request.getSession(false);
           if(session.getAttribute("fpassword")!=null)
           {
         	  session.invalidate();
         	  request.getSession(true);
-        	  response.sendRedirect("Login.jsp");
+        	  writer.println("logged out sucessfully");
+        	  response.sendRedirect("landing");
           }
           else
           {
-        	  response.sendRedirect("Login.jsp");
+        	  response.sendRedirect("landing");
           }
 	}
 

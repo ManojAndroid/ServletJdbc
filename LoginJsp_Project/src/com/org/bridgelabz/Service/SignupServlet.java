@@ -15,16 +15,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
-		request.getRequestDispatcher("Logout.jsp").include(request, response); 
-		
-		
 		PrintWriter printWriter = response.getWriter();
 		String firstname = request.getParameter("fname");
 		if (firstname == null || (firstname = firstname.trim()).length() == 0) {
@@ -61,16 +57,13 @@ public class LoginServlet extends HttpServlet {
 			int i = preparedStatement.executeUpdate();
 			if (i > 0) {
 				
-				
 				HttpSession httpSession = request.getSession();
 				 httpSession.setAttribute("fpassword",password);
-				 //httpSession.setMaxInactiveInterval(1*60);
-				request.getRequestDispatcher("Formjsp.jsp").include(request, response);  
+					response.sendRedirect("landing");
 
 				//response.sendRedirect("Formjsp.jsp");
 			} else {
-				printWriter.println("welcome" + firstname + " " + lastname);
-				response.sendRedirect("Login.jsp");
+				response.sendRedirect("lj2");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

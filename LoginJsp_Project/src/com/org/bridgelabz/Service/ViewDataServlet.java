@@ -17,10 +17,10 @@ import javax.servlet.http.*;
 public class ViewDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		
+		request.getRequestDispatcher("Header.jsp").include(request, response);
 		
 		
 		PrintWriter printWriter = response.getWriter();
@@ -29,11 +29,11 @@ public class ViewDataServlet extends HttpServlet {
 		  String fpassword= (String) httpSession.getAttribute("fpassword");
 		  if(fpassword==null||fpassword==" ")
 		  {
-			  printWriter.println("YOU can't go this page with valid email and password");
+			  printWriter.println("Session out login Again");
+				//response.sendRedirect("lj2");
 		  }
 		  else
 		  {
-			  request.getRequestDispatcher("Logout.jsp").include(request, response); 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -49,7 +49,6 @@ public class ViewDataServlet extends HttpServlet {
 			preparedStatement.setString(1, fpassword);
 			resultSet = preparedStatement.executeQuery();
 			int i = 1;
-			printWriter.println("<a href='LoginFormjsp.jsp'>BACK</a>");
 			while (resultSet.next()) {
 				printWriter.println("<html><body>");
 				printWriter.println("<center>");

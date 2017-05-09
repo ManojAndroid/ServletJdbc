@@ -22,24 +22,21 @@ public class LoginToFormjspServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("Logout.jsp").include(request, response); 
 
 		PrintWriter printWriter = response.getWriter();
 
 		String email = request.getParameter("Email");
-		
+
 		if (email == null || (email = email.trim()).length() == 0) {
 			printWriter.println("<p>Email: MISSING</p>");
 		}
-		
+
 		String password = request.getParameter("Password");
 		if (password == null || (password = password.trim()).length() == 0) {
 			printWriter.println("<p>Password: MISSING</p>");
 		}
-		//printWriter.println(email+" "+password);
-		
-		
-		
+		// printWriter.println(email+" "+password);
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -51,20 +48,14 @@ public class LoginToFormjspServlet extends HttpServlet {
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306?user=root&password=manoj");
 
 			preparedStatement = connection.prepareStatement(qry);
-			//preparedStatement.setString(1, email);
+			// preparedStatement.setString(1, email);
 			preparedStatement.setString(1, password);
 			resultSet = preparedStatement.executeQuery();
-			
 
 			if (resultSet.next()) {
-				/*ServletContext context=request.getServletContext();
-				context.setAttribute("logintoform",password);
-				
-				*
-				*/
-				HttpSession httpSession = request.getSession();
-				 httpSession.setAttribute("fpassword",password);
-				response.sendRedirect("LoginFormjsp.jsp");
+				HttpSession httpSession = request.getSession(true);
+				httpSession.setAttribute("fpassword", password);
+				response.sendRedirect("landing");
 
 			} else {
 				printWriter.println(

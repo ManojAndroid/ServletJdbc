@@ -10,7 +10,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 body {
-	padding-top: 50px;
 	background-color:white;
 }
 .div {
@@ -81,9 +80,10 @@ height:620px;
 	
 </script>
 <body >
-
+<jsp:include page="Header.jsp" />
+ <%if(session.getAttribute("fpassword")!=null){%>
 <div class="div" align="center">
-<center><h4><u></font color="white">Fill The Form page</font></u></h4></center>
+<center><h4><u></font color="white">Register New Employee</font></u></h4></center>
 <form action="RegistrationLoginUserServlet" method="post" name="reg" >
 		<label>	Enter FirstName :
 			<input type="text" name="fname" id="fnname" placeholder="Enter FirstName" style="width: 255px; height: 37px"></label><br>
@@ -148,10 +148,10 @@ height:620px;
 			<br>
 			<br>
 			
-			<input type="submit" class="btn btn-success" value="Submit" onclick="return ValidateEmail()" style="width:200px; height:45px;">
-			<button formaction="ViewData" class="btn btn-info" style="width:200px; height: 45px">Show Data</button>
+			<input type="submit" class="btn btn-success" value="Submit" onclick="return ValidateEmail()" style="width:350px; height:45px;">
 		</center>
 	</form>
 </div>
+ <% }%>
 </body>
 </html>

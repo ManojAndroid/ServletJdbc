@@ -10,7 +10,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 body {
-	padding-top: 50px;
 	background-color:white ;
 }
 
@@ -69,9 +68,10 @@ return true;
 
 </script>
 <body >
+<jsp:include page="Header.jsp" />
 	<div class="div" align="center" style="">
 		<label><h3>
-				<u>Welcome Login</u>
+				<u>Welcome To Login Page</u>
 			</h3></label>
 		<form method="post">
 
@@ -80,9 +80,8 @@ return true;
 			<label> <input type="password" id="passid" name="Password" placeholder="Enter Password"></label> 
 			<br> <br><br> 
 			<input type="submit" class="btn btn-info" onclick=" return ValidateEmail()" formaction="LoginToFormjspServlet" value="Login"
-			 style="width: 160px; height: 45px">
-			<button formaction="Signup.jsp" class="btn btn-success"
-				style="width: 160px; height: 45px">Signup</button>
+			 style="width:300px; height: 45px">
+			
 		</form>
 
 	</div>

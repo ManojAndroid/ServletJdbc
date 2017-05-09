@@ -12,7 +12,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 body {
-	padding-top: 50px;
 	background-color:white;
 }
 
@@ -77,6 +76,7 @@ width: 315px;
 	}
 </script>
 <body>
+<jsp:include page="Header.jsp" />
 	<div class="div" align="center">
 		<label><h3>
 				<u>USER SIGNUP PAGE</u>
