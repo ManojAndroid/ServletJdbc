@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,73 +14,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/RegistrationLoginUserServlet")
-public class RegistrationLoginUserServlet extends HttpServlet {
+@WebServlet("/UpdateServlet")
+public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		PrintWriter printWriter = response.getWriter();
 
 		HttpSession httpSession = request.getSession();
 		String fpassword = (String) httpSession.getAttribute("fpassword");
 		if (fpassword == null) {
 			response.sendRedirect("landing");
 		} else {
-
 			String fname = request.getParameter("fname");
-
-			if (fname == null || (fname = fname.trim()).length() == 0) {
-				printWriter.println("<p>Name: MISSING</p>");
-			}
-			String Sname = request.getParameter("sname");
 			String id = request.getParameter("id");
-			if (Sname == null || (Sname = Sname.trim()).length() == 0) {
-				printWriter.println("<p>LastName: MISSING</p>");
-			}
-			String fage = request.getParameter("age");
-
-			if (fage == null) {
-				printWriter.println("<p>Age: MISSING</p>");
-			}
+			String age = request.getParameter("age");
+			String sname = request.getParameter("sname");
+			String language = request.getParameter("language");
 			String gender = request.getParameter("gender");
-
-			if (gender == null || gender.length() == 0) {
-				printWriter.println("<p>Gender: MISSING</p>");
-			}
-			String skills = request.getParameter("generalized");
-
-			if (skills == null || skills.length() == 0) {
-				printWriter.println("<p>Gender: MISSING</p>");
-			}
-			String languages = request.getParameter("lang");
-
-			if (languages == null || languages.length() == 0) {
-				printWriter.println("<p>Gender: MISSING</p>");
-			}
+			String skill = request.getParameter("skill");
 			String address = request.getParameter("address");
 
-			if (address == null || (address = address.trim()).length() == 0) {
-				printWriter.println("<p>Name: MISSING</p>");
-			}
+			PrintWriter printWriter = response.getWriter();
+
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-
-			String qry = "insert into abc.formdata values(?,?,?,?,?,?,?,?,?)";
-
+			String sql = "update abc.formdata set Firstname=?,Surname=?,Age=?,Language=?,Gender=?,Skill=? ,Address=?, Password=? where ID=?";
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306?user=root&password=manoj");
 
-				preparedStatement = connection.prepareStatement(qry);
+				preparedStatement = connection.prepareStatement(sql);
 
 				preparedStatement.setString(1, fname);
-				preparedStatement.setString(2, Sname);
-				preparedStatement.setString(3, fage);
-				preparedStatement.setString(4, languages);
+				preparedStatement.setString(2, sname);
+				preparedStatement.setString(3, age);
+				preparedStatement.setString(4, language);
 				preparedStatement.setString(5, gender);
-				preparedStatement.setString(6, skills);
+				preparedStatement.setString(6, skill);
 				preparedStatement.setString(7, address);
 				preparedStatement.setString(8, fpassword);
 				preparedStatement.setString(9, id);
@@ -112,6 +82,6 @@ public class RegistrationLoginUserServlet extends HttpServlet {
 					}
 			}
 		}
-	}
 
+	}
 }

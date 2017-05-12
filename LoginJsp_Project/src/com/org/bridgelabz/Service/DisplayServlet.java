@@ -9,18 +9,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/ViewData")
-public class ViewDataServlet extends HttpServlet {
+@WebServlet("/DisplayServlet")
+public class DisplayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		request.getRequestDispatcher("Header.jsp").include(request, response);
 
 		PrintWriter printWriter = response.getWriter();
@@ -47,20 +48,37 @@ public class ViewDataServlet extends HttpServlet {
 				resultSet = preparedStatement.executeQuery();
 				int i = 1;
 				
+				  printWriter.println("<html>"); printWriter.
+				  println("<head><link rel='stylesheet' href='css/table.css' type='text/css'> "
+				  ); printWriter.println("</head> ");
+				  printWriter.println("<body><center>"); printWriter.println(
+				  "<table border='1px solid black; align='center' width='100%'"
+				  ); printWriter.print(
+				  "<tr><th>Emp_Id</th><th>FirstName</th> <th>LastName</th> <th>Age</th> <th>Language</th><th>Gender</th><th>Skills</th><th>Address</th></tr>"
+				 );
+				 
 				while (resultSet.next()) {
-					HttpSession session = request.getSession();
-					session.setAttribute("data", resultSet);
-					/*HttpSession session1 = request.getSession();
-					session.setAttribute("data1", resultSet);*/
-					RequestDispatcher rd = request.getRequestDispatcher("InformationTableJsp.jsp");
-					rd.forward(request, response);
-
+				
+					 printWriter.print("<tr><td>" +
+							 resultSet.getString(9) +"</td>" + "<td>" +
+					         resultSet.getString(1) +"</td>" + "<td>" +
+							 resultSet.getString(2) + "</td>" + "<td>" +
+							 resultSet.getString(3) + "</td>" + "<td>" +
+			                 resultSet.getString(4) + "</td>" + "<td>" +
+					         resultSet.getString(5) + "</td>" + "<td>" +
+					         resultSet.getString(6) + "</td>" + "<td>" +
+					         resultSet.getString(7) + "</td>" + "</td></tr>"); i++;
 					
 				}
 				
+				 printWriter.println("<center></table>");
+				  printWriter.println("</body>");
+				  
+				  printWriter.println("</html>");
+				 
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
-				
+
 				if (preparedStatement != null)
 					try {
 						preparedStatement.close();

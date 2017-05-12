@@ -39,6 +39,8 @@ height:620px;
 		var address = document.getElementById("addr").value;
 		var Fage = document.getElementById("fage").value;
 		var language = document.getElementById("lan").value;
+		var id = document.getElementById("id").value;
+
 		
 		if (firstname.length == " " || firstname == null||firstname.length<=3) {
 			alert("Enter FirstName Length should be more than three characters!");
@@ -46,6 +48,10 @@ height:620px;
 		}
 		if (lname.length == " " || lname == null||firstname.length<=3) {
 			alert("Enter LastName Length should be more than three characters!!");
+			return false;
+		} 
+		if (id.length!=4) {
+			alert("Enter  four digit id only!!!");
 			return false;
 		} 
 		if (Fage== 0 || Fage.length == null) {
@@ -86,10 +92,13 @@ height:620px;
 <center><h4><u></font color="white">Register New Employee</font></u></h4></center>
 <form action="RegistrationLoginUserServlet" method="post" name="reg" >
 		<label>	Enter FirstName :
-			<input type="text" name="fname" id="fnname" placeholder="Enter FirstName" style="width: 255px; height: 37px"></label><br>
+			<input type="text" name="fname" id="fnname" placeholder="Enter FirstName" style="width: 255px; height: 37px"></label>
 			<br><br> 
-		<label>	Enter LastName :
-			<input type="text" id="lname" name="sname" placeholder="Enter  LastName" style="width: 255px; height: 37px "></label><br> <br>
+			<label>	Enter LastName :
+			<input type="text" id="lname" name="sname" placeholder="Enter  LastName" style="width: 255px; height: 37px "></label><br>
+			<br>
+		<label>	Enter Id :
+			<input type="text" id="id" name="id" placeholder="Enter id" style="width: 255px; height: 37px "></label><br>
 			<br>
 			<label> Select Age: 
 			        <select name="age" id="fage" style="width: 86px; ">

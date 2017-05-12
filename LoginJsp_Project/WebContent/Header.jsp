@@ -18,10 +18,14 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<%if(session.getAttribute("fpassword")!=null) {%>
-			<li><a href="ViewData">Employees Details</a></li>
+			<li><a href="ViewData">UpdateEmployees Details</a></li>
 			<%} %>
+			
 			<%if(session.getAttribute("fpassword")!=null) {%>
 			<li><a href="form"> Register New Employee </a></li>
+			<%} %>
+			<%if(session.getAttribute("fpassword")!=null) {%>
+			<li><a href="DisplayServlet"> Display Employees Details</a></li>
 			<%} %>
 		</ul>
 

@@ -26,11 +26,11 @@ public class LogoutServlet extends HttpServlet {
         	  session.invalidate();
         	  request.getSession(true);
         	  writer.println("logged out sucessfully");
-        	  response.sendRedirect("landing");
+        	  response.sendRedirect("webpage");
           }
           else
           {
-        	  response.sendRedirect("landing");
+        	  response.sendRedirect("webpage");
           }
 	}
 
