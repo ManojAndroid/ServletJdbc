@@ -25,7 +25,7 @@ public class deleteServlet extends HttpServlet {
 
 		PrintWriter printWriter = response.getWriter();
 
-		String id = request.getParameter("id");
+		String id = request.getParameter("uid");
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -45,7 +45,7 @@ public class deleteServlet extends HttpServlet {
 
 			if (i > 0) {
 
-				response.sendRedirect("DisplayServlet");
+				response.sendRedirect("ViewData");
 			} else {
 				printWriter.println(
 						"<html><body bgcolor='#169393'><h1>Sorry There Is Something Problems Occured!!! </h1></body></html>");

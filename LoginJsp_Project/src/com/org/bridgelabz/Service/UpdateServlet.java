@@ -58,7 +58,7 @@ public class UpdateServlet extends HttpServlet {
 				int i = preparedStatement.executeUpdate();
 				if (i > 0) {
 
-					response.sendRedirect("DisplayServlet");
+					response.sendRedirect("ViewData");
 				} else {
 					printWriter.println(
 							"<html><body bgcolor='#169393'><h1>Sorry There Is Something Problems Occured!!! </h1></body></html>");
